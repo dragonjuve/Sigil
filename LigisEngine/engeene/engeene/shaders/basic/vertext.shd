@@ -1,0 +1,11 @@
+#version 330
+uniform mat4 mMatrix=mat4(1.0); 
+in vec2 LVertexPos2D;
+in vec2 inTexCoord;
+
+out vec2 texCoord;
+
+void main() {
+   gl_Position = mMatrix* vec4( LVertexPos2D.x, LVertexPos2D.y, 0, 1 );
+   texCoord = vec2(inTexCoord.x, inTexCoord.y);
+}

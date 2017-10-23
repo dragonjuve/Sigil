@@ -1,0 +1,20 @@
+#version 330
+uniform vec3 colorVec;
+uniform int mode = 0;
+uniform sampler2D texture1;
+
+in vec2 texCoord;
+
+out vec4 LFragment; 
+
+void main() {
+	if(mode == 0)
+	{
+		LFragment = vec4( colorVec.x, colorVec.y, colorVec.z, 1.0 ); 
+	}
+	else
+	{
+		LFragment = texture(texture1, texCoord);
+	}
+    
+}

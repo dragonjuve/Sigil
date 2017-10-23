@@ -1,0 +1,7 @@
+#version 330
+
+in vec3 OutColor; 
+out vec4 LFragment;
+void main() { 
+    LFragment = vec4( OutColor, 1.0 ); 
+}
