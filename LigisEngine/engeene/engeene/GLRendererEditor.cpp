@@ -22,21 +22,10 @@ GLRendererEditor::GLRendererEditor() :GLRenderer(800, 600)
 {
 	this->winWidth = 800;
 	this->winHeight = 600;
-	this->mapSizeRow = 5;
-	this->mapSizeCol = 5;
 	this->gridX = 0;
 	this->gridY = 0;
 	//projectionMatrix = glm::ortho(-10.f, 10.f, -10.f, 10.f);
 	projectionMatrix = glm::ortho(-2.f, 2.f, -2.f, 2.f);
-	this->colorList = new glm::vec3[5];
-	this->colorList[0] = glm::vec3(1.0f, 0.0f, 0.0f);
-	this->colorList[1] = glm::vec3(0.0f, 1.0f, 0.0f);
-	this->colorList[2] = glm::vec3(0.0f, 0.0f, 1.0f);
-	this->colorList[3] = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->colorList[4] = glm::vec3(0.0f, 0.0f, 0.0f);
-	this->currentColor = 0;
-	this->currentSelect = 0;
-
 	for (unsigned int i = 0; i < 16; i++) {
 		textureId[i] = -1;
 	}

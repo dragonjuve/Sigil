@@ -67,8 +67,8 @@ Align::Align(const wxString& title)
 	image.AddHandler(new wxJPEGHandler);
 	//bitmap1.SetHandle(new wxPNGHandler);
 	//bitmap2.SetHandle(new wxJPEGHandler);
-	bitmap1.LoadFile("D:/engeene/engeene/texture/tilefloor.png", wxBITMAP_TYPE_PNG);
-	bitmap2.LoadFile("D:/engeene/engeene/texture/tile.jpg", wxBITMAP_TYPE_JPEG);
+	bitmap1.LoadFile("texture/tilefloor.png", wxBITMAP_TYPE_PNG);
+	bitmap2.LoadFile("texture/tile.jpg", wxBITMAP_TYPE_JPEG);
 	wxBitmapButton *b1 = new wxBitmapButton(mainPanel, ID_BUTTON_A, bitmap1, wxDefaultPosition, wxSize(50, 50));
 	wxBitmapButton *b2 = new wxBitmapButton(mainPanel, ID_BUTTON_B, bitmap2, wxDefaultPosition, wxSize(50, 50));
 	//wxButton *b1 = new wxButton(mainPanel, ID_BUTTON_A, wxT("A"));
@@ -107,10 +107,10 @@ void Align::OnSave(wxCommandEvent & evt) {
 	if (save == wxID_OK) {
 		wxLogMessage("Save");
 		FILE *fptr;
-		fptr = fopen("D:/LigisEngine2/engeene/engeene/Save/save1.txt", "w");
+		fptr = fopen("D:/LigisEngine/LigisEngine/engeene/engeene/Save/save1.txt", "w");
 		fprintf(fptr, "%d %d\n", rowMax, colMax);
 		//grids[i][j].getGridType().compare("A") == 0
-		for (int i = 0; i < rowMax; i++) {
+		for (int i = rowMax-1; i >= 0; i--) {
 			for (int j = 0; j < colMax; j++) {
 				if ((*editor).getGridFrom(i, j)->getGridType().compare("A") == 0) {
 					fprintf(fptr, "%c", 'A');
@@ -124,7 +124,7 @@ void Align::OnSave(wxCommandEvent & evt) {
 			}
 			fprintf(fptr, "\n");
 		}
-		for (int i = 0; i < rowMax; i++) {
+		/*for (int i = 0; i < rowMax; i++) {
 			for (int j = 0; j < colMax; j++) {
 				if ((*editor).getGridFrom(i, j)->getWallTop() == true) {
 					fprintf(fptr, "T ");
@@ -140,7 +140,7 @@ void Align::OnSave(wxCommandEvent & evt) {
 				}
 			}
 			fprintf(fptr, "\n");
-		}
+		}*/
 		fclose(fptr);
 	}
 }
@@ -148,12 +148,12 @@ void Align::OnSave(wxCommandEvent & evt) {
 void Align::OnOpen(wxCommandEvent & evt) {
 	FILE *fptr, *fptr2;
 	char alphabet;
-	fptr = fopen("D:/LigisEngine2/engeene/engeene/Save/save1.txt", "r");
+	fptr = fopen("D:/LigisEngine/LigisEngine/engeene/engeene/Save/save1.txt", "r");
 	fscanf(fptr, "%i", &rowMax);
 	fscanf(fptr, "%i", &colMax);
 	editor->createNewMap(rowMax, colMax);
 	wxLogMessage("%i %i", rowMax, colMax);
-	this->Refresh();
+	fscanf(fptr, "%c", &alphabet);
 	for (int i = 0; i < rowMax; i++) {
 		for (int j = 0; j < colMax; j++) {
 			fscanf(fptr, "%c", &alphabet);
@@ -164,33 +164,12 @@ void Align::OnOpen(wxCommandEvent & evt) {
 				(*editor).getGridFrom(i, j)->setGridType("B");
 			}
 		}
+		fscanf(fptr, "%c", &alphabet);
 	}
-	
+	this->Refresh();
 	fclose(fptr);
 }
 
-void Align::OnChar(wxKeyEvent& evt) {
-
-	switch (evt.GetKeyCode())
-	{
-	case WXK_LEFT:
-		glcanvas->editorRenderer->moveGrid(3);
-		break;
-	case WXK_RIGHT:
-		glcanvas->editorRenderer->moveGrid(2);
-		break;
-	case WXK_UP:
-		glcanvas->editorRenderer->moveGrid(0);
-		break;
-	case WXK_DOWN:
-		glcanvas->editorRenderer->moveGrid(1);
-		break;
-	case WXK_SPACE:
-		glcanvas->editorRenderer->changeMapColor();
-		break;
-	}
-	this->Refresh();
-}
 
 void Align::OnNew(wxCommandEvent & evt) {
 	CustomDialog di(this);
@@ -280,7 +259,6 @@ EVT_CHECKBOX(ID_BUTTON_TOP, Align::OnWallChange)
 EVT_CHECKBOX(ID_BUTTON_BOTTOM, Align::OnWallChange)
 EVT_CHECKBOX(ID_BUTTON_LEFT, Align::OnWallChange)
 EVT_CHECKBOX(ID_BUTTON_RIGHT, Align::OnWallChange)
-EVT_CHAR_HOOK(Align::OnChar)
 END_EVENT_TABLE()
 BEGIN_EVENT_TABLE(MyGLCanvas, wxGLCanvas)
 EVT_SIZE(MyGLCanvas::setViewport)

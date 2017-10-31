@@ -10,7 +10,6 @@ public:
 	void OnNew(wxCommandEvent & evt);
 	void OnSave(wxCommandEvent & evt);
 	void OnOpen(wxCommandEvent & evt);
-	void OnChar(wxKeyEvent& evt);
 	void OnGridChange(wxCommandEvent &evt);
 	void OnWallChange(wxCommandEvent &evt);
 	wxCheckBox *chB1;

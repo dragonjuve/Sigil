@@ -25,7 +25,7 @@ void Grid::draw() {
 	glm::mat4 transform = GLRendererEditor::getInstance()->getProjection() * modelMatrix;
 	GLRendererEditor::getInstance()->setShaderMode(1);
 	GLRendererEditor::getInstance()->setShaderModelMat(transform);
-	GLRendererEditor::getInstance()->setRenderTex(0);
+	//GLRendererEditor::getInstance()->setRenderTex(0);
 	square->render();
 	drawWall();
 	//implement draw just like map
