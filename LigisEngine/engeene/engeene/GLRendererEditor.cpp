@@ -55,7 +55,7 @@ bool GLRendererEditor::initialize(string vertexShaderFile, string fragmentShader
 	return true;
 }
 
-void GLRendererEditor::initTex(string textureName) {
+void GLRendererEditor::initTex(string textureName,int fileType) {
 	if (idCount < 16) {
 		glGenTextures(1, &textureId[idCount]);
 		glBindTexture(GL_TEXTURE_2D, textureId[idCount]);
@@ -69,7 +69,10 @@ void GLRendererEditor::initTex(string textureName) {
 		unsigned char *data = stbi_load(textN, &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			if(fileType == 0)
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			else if(fileType == 1)
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 			//std::cout << "OK load texture" << std::endl;
 			idCount++;
@@ -300,6 +303,11 @@ void GLRendererEditor::setRenderColor(glm::vec3 clr)
 void GLRendererEditor::setRenderTex(int index)
 {
 	glBindTexture(GL_TEXTURE_2D, textureId[index]);
+}
+
+int GLRendererEditor::getTexLo()
+{
+	return textureLocation;
 }
 
 

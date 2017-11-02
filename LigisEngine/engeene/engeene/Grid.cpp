@@ -99,7 +99,7 @@ int Grid::getCol()
 void Grid::drawWall() {
 	WallMeshVbo* wall = dynamic_cast<WallMeshVbo*> (GLRendererEditor::getInstance()->getShape("Wall"));
 	GLRendererEditor::getInstance()->setShaderMode(0);
-	GLRendererEditor::getInstance()->setRenderColor(glm::vec3(0.647f, 0.165f, 0.165f));
+	//GLRendererEditor::getInstance()->setRenderColor(glm::vec3(0.647f, 0.165f, 0.165f));
 	if (wallTop) {
 		glm::mat4 modelMatrix = glm::mat4(1.f);
 		modelMatrix = glm::translate(glm::mat4(1.f), glm::vec3((float)col + 0.5f, (float)row + 0.9f, 0.f));

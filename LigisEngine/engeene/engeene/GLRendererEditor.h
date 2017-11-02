@@ -40,7 +40,7 @@ public:
 	void setCurrentColor(int color);
 	void setCurrentTexture(int texture);
 	void initTexture();
-	void initTex(string textureName);
+	void initTex(string textureName,int fileType);
 	//void saveMap();
 	//void loadMap();
 	void initRender();
@@ -50,5 +50,5 @@ public:
 	void setShaderModelMat(glm::mat4 mat);
 	void setRenderColor(glm::vec3 clr);
 	void setRenderTex(int index);
-	
+	int getTexLo();
 };

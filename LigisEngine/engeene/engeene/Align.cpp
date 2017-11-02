@@ -107,7 +107,7 @@ void Align::OnSave(wxCommandEvent & evt) {
 	if (save == wxID_OK) {
 		wxLogMessage("Save");
 		FILE *fptr;
-		fptr = fopen("D:/LigisEngine/LigisEngine/engeene/engeene/Save/save1.txt", "w");
+		fptr = fopen("Save/save1.txt", "w");
 		fprintf(fptr, "%d %d\n", rowMax, colMax);
 		//grids[i][j].getGridType().compare("A") == 0
 		for (int i = rowMax-1; i >= 0; i--) {
@@ -148,7 +148,7 @@ void Align::OnSave(wxCommandEvent & evt) {
 void Align::OnOpen(wxCommandEvent & evt) {
 	FILE *fptr, *fptr2;
 	char alphabet;
-	fptr = fopen("D:/LigisEngine/LigisEngine/engeene/engeene/Save/save1.txt", "r");
+	fptr = fopen("Save/save1.txt", "r");
 	fscanf(fptr, "%i", &rowMax);
 	fscanf(fptr, "%i", &colMax);
 	editor->createNewMap(rowMax, colMax);

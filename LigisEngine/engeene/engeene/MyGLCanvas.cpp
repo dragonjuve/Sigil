@@ -20,8 +20,8 @@ MyGLCanvas::MyGLCanvas(wxPanel* parent, Editor *editor) :
 	editorRenderer = dynamic_cast<GLRendererEditor*>(renderer);
 	editorRenderer->setMapSize(mapSizeR, mapSizeC);
 	//editorRenderer->initTexture();
-	editorRenderer->initTex("texture/tilefloor.png");
-	editorRenderer->initTex("texture/tile.jpg");
+	editorRenderer->initTex("texture/tilefloor_old.png",1);
+	editorRenderer->initTex("texture/tile_old.jpg",0);
 
 	(*this).editor = editor;
 
